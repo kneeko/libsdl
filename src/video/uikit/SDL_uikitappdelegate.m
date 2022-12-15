@@ -34,6 +34,8 @@
 
 #include "../../events/SDL_events_c.h"
 
+#import <AVFoundation/AVFoundation.h>
+
 #ifdef main
 #undef main
 #endif
@@ -245,6 +247,9 @@ SDL_LoadLaunchImageNamed(NSString *name, int screenh)
             self.view = view;
         }
     }
+
+    // HACK(nico): force audio to initialize as ambient
+    [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryAmbient error: nil];
 
     return self;
 }
